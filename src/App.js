@@ -14,6 +14,7 @@ import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 
 import ShowWrestler from './components/wrestlers/ShowWrestler'
+import CreateWrestler from './components/wrestlers/CreateWrestler'
 
 const App = () => {
 
@@ -70,6 +71,13 @@ const App = () => {
 							<ChangePassword msgAlert={msgAlert} user={user} />
 							
 						</RequireAuth>}
+				/>
+				<Route
+					path='/create-wrestler'
+					element={
+					<RequireAuth user={user}>
+						<CreateWrestler msgAlert={msgAlert} user={user} />
+					</RequireAuth>}
 				/>
 				<Route 
 							path='wrestlers/:id'

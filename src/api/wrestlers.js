@@ -1,4 +1,4 @@
-//where the api calls for the pets resource will live
+//where the api calls for the wrestlers resource will live
 
 import apiUrl from '../apiConfig'
 import axios from 'axios'
@@ -14,6 +14,18 @@ export const getOneWrestler = (id) =>{
 }
 
 //Create
+export const createWrestler = (user, newWrestler) => {
+    console.log('this is the user', user)
+    console.log('this is the newWrestler', newWrestler)
+    return axios({
+        url: `${apiUrl}/wrestlers`,
+        method: 'POST',
+        headers: {
+            Authorization: `Token token=${user.token}`
+        },
+        data: { wrestler: newWrestler }
+    })
+}
 
 //Update
 

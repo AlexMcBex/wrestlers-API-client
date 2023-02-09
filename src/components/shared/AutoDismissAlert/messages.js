@@ -6,7 +6,15 @@ const messages = {
 	signOutSuccess: 'Come back soon!',
 	changePasswordSuccess: 'Password changed successfully!',
 	changePasswordFailure:'Failed to change passwords. Check your old password and try again.',
-	getWrestlersFailure: 'Failed to retrieve Wrestlers. DAMN'
+	getWrestlersFailure: 'Failed to retrieve wrestlers. DAMN',
+	createWrestlerSuccess: 'New wrestler has been created! Hell Yeah!',
+	createWrestlerFailure: 'Failed to create new wrestler, try again',
+	updateWrestlerSuccess: 'wrestler has been updated!',
+	updateWrestlerFailure: 'Failed to update wrestler, try again',
+	removeWrestlerSuccess: 'This wrestler got released',
+	removeWrestlerFailure: 'Something went wrong, try again',
+	createToySuccess: 'title added correctly',
+	createToyFailure: 'something went wrong...'
 }
 
 module.exports = messages

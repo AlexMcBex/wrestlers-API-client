@@ -62,6 +62,11 @@ const WrestlersIndex = (props) => {
                     <Link to={`/wrestlers/${wrestler.id}`} className="btn btn-info">View { wrestler.name }</Link>
                 </Card.Text>
             </Card.Body>
+            { wrestler.owner ?
+                <Card.Footer>
+                     Manager: {wrestler.owner.email} 
+                </Card.Footer>
+                : null}
         </Card>
     ))
 
