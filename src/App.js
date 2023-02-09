@@ -13,6 +13,8 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 
+import ShowWrestler from './components/wrestlers/ShowWrestler'
+
 const App = () => {
 
 	const [user, setUser] = useState(null)
@@ -66,8 +68,14 @@ const App = () => {
 					element={
 						<RequireAuth user={user}>
 							<ChangePassword msgAlert={msgAlert} user={user} />
+							
 						</RequireAuth>}
 				/>
+				<Route 
+							path='wrestlers/:id'
+							element={ <ShowWrestler user={user}
+						msgAlert={msgAlert} />}
+							/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (
 				<AutoDismissAlert

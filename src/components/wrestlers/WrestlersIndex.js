@@ -59,7 +59,7 @@ const WrestlersIndex = (props) => {
             <Card.Header>{ wrestler.fullTitle }</Card.Header>
             <Card.Body>
                 <Card.Text>
-                    <Link to={`/wrestlerswrestler.id}`} className="btn btn-info">View { wrestler.name }</Link>
+                    <Link to={`/wrestlers/${wrestler.id}`} className="btn btn-info">View { wrestler.name }</Link>
                 </Card.Text>
             </Card.Body>
         </Card>
