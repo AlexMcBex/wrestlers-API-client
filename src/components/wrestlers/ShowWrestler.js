@@ -7,6 +7,7 @@ import messages from '../shared/AutoDismissAlert/messages'
 import { getOneWrestler, removeWrestler, updateWrestler } from '../../api/wrestlers'
 import CardHeader from 'react-bootstrap/esm/CardHeader'
 import EditWrestlerModal from './EditWrestlerModal'
+import NewTitleModal from '../titles/NewTitleModal'
 
 import ShowTitle from '../titles/ShowTitle'
 
@@ -20,6 +21,7 @@ const ShowWrestler = (props) => {
     const [wrestler, setWrestler] = useState(null)
     const [editModalShow, setEditModalShow] = useState(false)
     const [updated, setUpdated] = useState(false)
+    const [titleModalShow, setTitleModalShow] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -91,6 +93,12 @@ const ShowWrestler = (props) => {
                     </Card.Text>
                 </Card.Body>
                 <Card.Footer>
+                <Button 
+                            className="m-2" variant="info"
+                            onClick={() => setTitleModalShow(true)}
+                        >
+                            Assign {wrestler.name} a title!
+                        </Button>
                         {
                             wrestler.owner && user && wrestler.owner._id === user._id
                             ?
@@ -113,6 +121,7 @@ const ShowWrestler = (props) => {
                         }
                     </Card.Footer>
             </Card>
+            </Container>
             <Container className="m-2" style={titleCardContainerLayout}>
                 {titleCards}
             </Container>
@@ -125,7 +134,14 @@ const ShowWrestler = (props) => {
                 triggerRefresh={() => setUpdated(prev => !prev)}
                 wrestler={wrestler}
             />
-        </Container>
+                <NewTitleModal 
+                user={user}
+                wrestler={wrestler}
+                show={titleModalShow}
+                handleClose={() => setTitleModalShow(false)}
+                msgAlert={msgAlert}
+                triggerRefresh={() => setUpdated(prev => !prev)}
+            />
         </>
     )
 }
