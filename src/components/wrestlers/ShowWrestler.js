@@ -8,6 +8,14 @@ import { getOneWrestler, removeWrestler, updateWrestler } from '../../api/wrestl
 import CardHeader from 'react-bootstrap/esm/CardHeader'
 import EditWrestlerModal from './EditWrestlerModal'
 
+import ShowTitle from '../titles/ShowTitle'
+
+const titleCardContainerLayout = {
+    display: 'flex',
+    justifyContent: 'center',
+    flexFlow: 'row wrap'
+}
+
 const ShowWrestler = (props) => {
     const [wrestler, setWrestler] = useState(null)
     const [editModalShow, setEditModalShow] = useState(false)
@@ -53,6 +61,18 @@ const ShowWrestler = (props) => {
             })
     }
 
+    let titleCards
+    if (wrestler) {
+        if (wrestler.titles.length > 0) {
+            titleCards = wrestler.titles.map(title => (
+                <ShowTitle
+                    key={title.id} 
+                    title={title}
+                />
+            ))
+        }
+    }
+
 
     if (!wrestler) {
         return <p>...loading</p>
@@ -93,6 +113,9 @@ const ShowWrestler = (props) => {
                         }
                     </Card.Footer>
             </Card>
+            <Container className="m-2" style={titleCardContainerLayout}>
+                {titleCards}
+            </Container>
             <EditWrestlerModal 
                 user={user}
                 show={editModalShow}
