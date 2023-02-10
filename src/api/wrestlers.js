@@ -29,4 +29,13 @@ export const createWrestler = (user, newWrestler) => {
 
 //Update
 
-//Delete
+// Delete (delete a wrestler)
+export const removeWrestler = (user, wrestlerId) => {
+    return axios({
+        url: `${apiUrl}/wrestlers/${wrestlerId}`,
+        method: 'DELETE',
+        headers: {
+            Authorization: `Token token=${user.token}`
+        }
+    })
+}

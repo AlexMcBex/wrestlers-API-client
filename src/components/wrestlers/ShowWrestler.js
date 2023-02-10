@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Card, Container, Button } from 'react-bootstrap'
 import messages from '../shared/AutoDismissAlert/messages'
 
 
-import { getOneWrestler } from '../../api/wrestlers'
+import { getOneWrestler, removeWrestler } from '../../api/wrestlers'
 import CardHeader from 'react-bootstrap/esm/CardHeader'
 
 const ShowWrestler = (props) => {
     const [wrestler, setWrestler] = useState(null)
     const { id } = useParams()
+    const navigate = useNavigate()
 
     const { user, msgAlert } = props
     console.log('user in ShowWrestler props: ', user)
@@ -27,6 +28,29 @@ const ShowWrestler = (props) => {
         })
     }, [])
 
+      // here's where our removeWrestler function will be called
+      const releaseWrestler = () => {
+        removeWrestler(user, wrestler.id)
+            // upon success, send the appropriate message and redirect users
+            .then(() => {
+                msgAlert({
+                    heading: 'Success',
+                    message: messages.removeWrestlerSuccess,
+                    variant: 'success'
+                })
+            })
+            .then(() => {navigate('/')})
+            // upon failure, just send a message, no navigation required
+            .catch(err => {
+                msgAlert({
+                    heading: 'Error',
+                    message: messages.removeWrestlerFailure,
+                    variant: 'danger'
+                })
+            })
+    }
+
+
     if (!wrestler) {
         return <p>...loading</p>
     }
@@ -43,6 +67,22 @@ const ShowWrestler = (props) => {
                         <div></div>
                     </Card.Text>
                 </Card.Body>
+                <Card.Footer>
+                        {
+                            wrestler.owner && user && wrestler.owner._id === user._id
+                            ?
+                            <>
+                                <Button 
+                                    className="m-2" variant="danger"
+                                    onClick={() => releaseWrestler()}
+                                >
+                                    release {wrestler.name} 
+                                </Button>
+                            </>
+                            :
+                            null
+                        }
+                    </Card.Footer>
             </Card>
         </Container>
         </>
