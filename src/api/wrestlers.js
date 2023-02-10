@@ -28,6 +28,16 @@ export const createWrestler = (user, newWrestler) => {
 }
 
 //Update
+export const updateWrestler = (user, updatedWrestler) => {
+    return axios({
+        url: `${apiUrl}/wrestlers/${updatedWrestler.id}`,
+        method: 'PATCH',
+        headers: {
+            Authorization: `Token token=${user.token}`
+        },
+        data: { wrestler: updatedWrestler}
+    })
+}
 
 // Delete (delete a wrestler)
 export const removeWrestler = (user, wrestlerId) => {

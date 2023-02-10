@@ -4,11 +4,14 @@ import { Card, Container, Button } from 'react-bootstrap'
 import messages from '../shared/AutoDismissAlert/messages'
 
 
-import { getOneWrestler, removeWrestler } from '../../api/wrestlers'
+import { getOneWrestler, removeWrestler, updateWrestler } from '../../api/wrestlers'
 import CardHeader from 'react-bootstrap/esm/CardHeader'
+import EditWrestlerModal from './EditWrestlerModal'
 
 const ShowWrestler = (props) => {
     const [wrestler, setWrestler] = useState(null)
+    const [editModalShow, setEditModalShow] = useState(false)
+    const [updated, setUpdated] = useState(false)
     const { id } = useParams()
     const navigate = useNavigate()
 
@@ -26,7 +29,7 @@ const ShowWrestler = (props) => {
                 variant: 'danger'
             })
         })
-    }, [])
+    }, [updated])
 
       // here's where our removeWrestler function will be called
       const releaseWrestler = () => {
@@ -72,6 +75,12 @@ const ShowWrestler = (props) => {
                             wrestler.owner && user && wrestler.owner._id === user._id
                             ?
                             <>
+                             <Button 
+                                    className="m-2" variant="warning"
+                                    onClick={() => setEditModalShow(true)}
+                                >
+                                    Edit {wrestler.name}
+                                </Button>
                                 <Button 
                                     className="m-2" variant="danger"
                                     onClick={() => releaseWrestler()}
@@ -84,6 +93,15 @@ const ShowWrestler = (props) => {
                         }
                     </Card.Footer>
             </Card>
+            <EditWrestlerModal 
+                user={user}
+                show={editModalShow}
+                handleClose={() => setEditModalShow(false)}
+                updateWrestler={updateWrestler}
+                msgAlert={msgAlert}
+                triggerRefresh={() => setUpdated(prev => !prev)}
+                wrestler={wrestler}
+            />
         </Container>
         </>
     )
