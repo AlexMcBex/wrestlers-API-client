@@ -70,6 +70,10 @@ const ShowWrestler = (props) => {
                 <ShowTitle
                     key={title.id} 
                     title={title}
+                    user ={user}
+                    wrestler={wrestler}
+                    msgAlert={msgAlert}
+                    triggerRefresh={()=>setUpdated(prev=> !prev)}
                 />
             ))
         }
