@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { deleteTitle } from '../../api/titles'
+import EditTitleModal from './EditTitleModal'
 
 const ShowTitle = (props) => {
     const { title, user, wrestler, msgAlert, triggerRefresh } = props
+    const [editModalShow, setEditModalShow] = useState(false)
 
     const destroyTitle = () => {
         deleteTitle(user, wrestler.id, title._id)
@@ -32,11 +35,17 @@ const ShowTitle = (props) => {
                     <small>held for {title.length} days</small>
                 </Card.Body>
                 <Card.Footer>
-                    <small>Condition: {title.condition}</small><br />
-                    {
+                {
                         user && wrestler.owner && user._id === wrestler.owner._id
                             ?
                             <>
+                                <Button
+                                    onClick={() => setEditModalShow(true)}
+                                    variant="warning"
+                                    className="m-2"
+                                >
+                                    Edit Title
+                                </Button>
                                 <Button
                                     onClick={() => destroyTitle()}
                                     variant="danger"
@@ -50,6 +59,15 @@ const ShowTitle = (props) => {
                     }
                 </Card.Footer>
             </Card>
+            <EditTitleModal 
+            user={user}
+            wrestler={wrestler}
+            title={title}
+            show={editModalShow}
+            handleClose={() => setEditModalShow(false)}
+            msgAlert={msgAlert}
+            triggerRefresh={triggerRefresh}
+            />
         </>
     )
 }

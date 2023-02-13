@@ -68,9 +68,9 @@ const ShowWrestler = (props) => {
         if (wrestler.titles.length > 0) {
             titleCards = wrestler.titles.map(title => (
                 <ShowTitle
+                    user={user}
                     key={title.id} 
                     title={title}
-                    user ={user}
                     wrestler={wrestler}
                     msgAlert={msgAlert}
                     triggerRefresh={()=>setUpdated(prev=> !prev)}

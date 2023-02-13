@@ -6,7 +6,7 @@ import { createTitle } from '../../api/titles'
 import messages from '../shared/AutoDismissAlert/messages'
 
 const NewTitleModal = (props) => {
-    const { user, wrestler, show, handleClose, msgAlert, triggerRefresh } = props
+    const { wrestler, show, handleClose, msgAlert, triggerRefresh } = props
 
     const [title, setTitle] = useState({})
 

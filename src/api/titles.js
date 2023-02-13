@@ -13,9 +13,9 @@ export const createTitle = (wrestlerId, newTitle) => {
 
 // UPDATE
 // /titles/:wrestlerId/:titleId
-export const updateTitle = (user, wrestlerId, updatedTitle) => {
+export const updateTitle = (wrestlerId, user, updatedTitle) => {
     return axios({
-        url: `${apiUrl}/titles/${wrestlerId}/${updatedTitle.id}`,
+        url: `${apiUrl}/titles/${wrestlerId}/${updatedTitle._id}`,
         method: 'PATCH',
         headers: {
             Authorization: `Token token=${user.token}`
