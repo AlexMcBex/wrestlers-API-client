@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
     // YOU MUST CHANGE PRODUCTION URL WHEN DEPLOYING
-	production: 'http://wrestler-api.fly.dev/',
+	production: 'https://wrestler-api.fly.dev',
 	development: 'http://localhost:8000',
 }
 
